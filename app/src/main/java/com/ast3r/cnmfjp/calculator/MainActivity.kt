@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
@@ -65,6 +64,7 @@ fun DisplayArea(calculator: Display) {
     val symbolRegex = "[+\\-×÷]".toRegex()
 
     val delKeyColor by animateColorAsState(if(!calError) MaterialTheme.colors.primary else Color(0xffaf2323))
+    val scrollState = rememberScrollState()
 
     fun clear() {
         input = ""
@@ -161,7 +161,7 @@ fun DisplayArea(calculator: Display) {
                             fontWeight = FontWeight.Medium,
                             textAlign = TextAlign.End,
                             maxLines = 1,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth().horizontalScroll(scrollState)
                         )
                     }
                 }
