@@ -74,6 +74,10 @@ fun DisplayArea(calculator: Display) {
         calError = false
     }
 
+    fun validator(): Boolean {
+        return (!calError and (input != calculator.calInput))
+    }
+
     fun typeDigit(source: String, inputKey: String): String {
         if (calFinished) {
             clear()
@@ -368,7 +372,7 @@ fun DisplayArea(calculator: Display) {
                         }
                         TextButton(
                             onClick = {
-                                if (!calError) {
+                                if (validator()) {
                                     val expression = ExpressionBuilder(
                                         input.replace("×", "*").replace("÷", "/")
                                     ).build()
